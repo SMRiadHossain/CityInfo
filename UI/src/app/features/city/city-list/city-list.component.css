@@ -1,0 +1,20 @@
+.outer{
+
+    
+    height: 100vh;
+    background: linear-gradient(to top, #c9c9ff 50%, #6e6ef6 90%) no-repeat;
+
+    /* width: 225vh; 
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-image: url(../../home/images/image.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    justify-content: center;
+    animation: change 10s infinite ease-in-out; */
+}
+
+

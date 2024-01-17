@@ -1,0 +1,8 @@
+.container-fluid{
+    background-color: rgba(146, 154, 228, 0.473);
+}
+.btn{
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}

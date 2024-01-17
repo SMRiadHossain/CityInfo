@@ -1,0 +1,52 @@
+<div class="outer">
+    <div class="container">
+        <h1 class="mt-3"> Point Of Interest List</h1>
+
+        <div class="d-flex justify-content-end mt3">
+            <a [routerLink]="['/admin/pointofinterest/add']" class="btn btn-primary">
+                Add Point Of Interest</a>
+
+        </div>
+
+        <form #form="ngForm" (ngSubmit)="ngOnInit()">
+            <div class="mt-2">
+                <div class="mt-3">
+                    <label class="form-label">City Id</label>
+                    <input type="number" id = "pointCityId" class="form-control" name="pointCityId" [(ngModel)]="pointCityId">
+                
+                    <button type="submit" class="btn btn-primary" >Show</button>
+                </div>
+
+            </div>
+        </form>
+
+        <table class="table" *ngIf="pointsofinterests && pointsofinterests.length>0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>City Id</th>
+                    <th>UserId</th>
+                    <th> </th>
+                    <th> </th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let points of pointsofinterests">
+                    <td>{{points.id}}</td>
+                    <td>{{points.name}}</td>
+                    <td>{{points.description}}</td>
+                    <td>{{points.cityId}}</td>
+                    <td>{{points.userId}}</td>
+                    <td><a class="btn btn-primary" [routerLink] = 
+                        "['/admin/pointsofinterest/edit/'+points.cityId+'/'+points.id]">Edit</a></td>
+                    <td><button type="button" class="btn btn-danger" (click)="deletePoint(pointCityId,points.id)">Delete</button></td>
+                </tr>
+            </tbody>
+
+        </table>
+        <p *ngIf="!pointsofinterests || pointsofinterests.length<= 0">No Point of Interest Found</p>
+
+    </div>
+</div>
