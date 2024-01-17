@@ -1,0 +1,37 @@
+
+<div class="outer">
+    <div class="container">
+        <h1 class="mt-3"> City List</h1>
+
+        <div class="d-flex justify-content-end mt3">
+            <a [routerLink]="['/admin/cities/add']" class="btn btn-primary">
+                Add City</a>
+
+        </div>
+
+        <table class="table" *ngIf="cities && cities.length>0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th> </th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let city of cities">
+                    <td>{{city.id}}</td>
+                    <td>{{city.name}}</td>
+                    <td>{{city.description}}</td>
+                    <td><a class="btn btn-primary" [routerLink] = "['/admin/cities/edit/'+city.id]">Edit</a></td>
+                    <td><button type="button" class="btn btn-danger" (click)="deleteCity(city.id) ">Delete</button></td>
+                </tr>
+            </tbody>
+
+        </table>
+        <p *ngIf="!cities || cities.length<= 0">No Cities Found</p>
+
+    </div>
+</div>
+
