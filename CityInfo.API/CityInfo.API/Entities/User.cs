@@ -26,6 +26,8 @@ namespace CityInfo.API.Entities
 
         public string lastName { get; set; }
 
+        public string token { get; set; }
+
         public ICollection<City> cities { get; set; }
             = new List<City>();
 

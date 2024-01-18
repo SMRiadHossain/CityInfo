@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CityInfo.API.Entities;
+using CityInfo.API.Helpers;
 using CityInfo.API.Models;
 using CityInfo.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -67,11 +68,27 @@ namespace CityInfo.API.Controllers
                 return BadRequest();
             }
 
+            
+
             var user = await _cityInfoRepository.UserExistAsync(userObj.userName);
             if (user)
             {
                 return BadRequest(new { Message = "User Name Already Exist" });
             }
+
+            var mail = await _cityInfoRepository.EmailExistAsync(userObj.email);
+
+            if (mail)
+            {
+                return BadRequest(new { Message = "Email Already Exist" });
+            }
+            var pass = _cityInfoRepository.CheckPasswordStrength(userObj.password);
+
+            if(!string.IsNullOrEmpty(pass))
+            {
+                return BadRequest(new {Message = pass});
+            }
+            userObj.password = PasswordHasher.HashPassword(userObj.password);
 
             var finalUSerDetails = _mapper.Map<User>(userObj);
 

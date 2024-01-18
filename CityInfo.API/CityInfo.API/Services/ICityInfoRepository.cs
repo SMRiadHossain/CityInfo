@@ -31,7 +31,10 @@ namespace CityInfo.API.Services
 
         Task<bool> UserExistAsync(string userName);
         Task<bool> UserExistAsync(int userId);
+        Task<bool> EmailExistAsync(string email);
         Task<bool> PasswordValidAsync(string password);
         Task AddNewUserAsync(UserDto finalUSerDetails);
+
+        string CheckPasswordStrength(string password);
     }
 }

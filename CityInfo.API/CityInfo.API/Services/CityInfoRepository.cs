@@ -2,6 +2,8 @@
 using CityInfo.API.Entities;
 using CityInfo.API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CityInfo.API.Services
 {
@@ -114,6 +116,11 @@ namespace CityInfo.API.Services
         {
             return await _context.Users.AnyAsync(c => c.userName == userName);
         }
+
+        public async Task<bool> EmailExistAsync(string email)
+        {
+            return await _context.Users.AnyAsync(c => c.email == email);
+        }
         public async Task<bool> UserExistAsync(int userId)
         {
             return await _context.Users.AnyAsync(c => c.Id == userId);
@@ -127,6 +134,22 @@ namespace CityInfo.API.Services
         public Task AddNewUserAsync(UserDto finalUSerDetails)
         {
             throw new NotImplementedException();
+        }
+
+        public string CheckPasswordStrength(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+          
+            if (password.Length<8)
+                sb.Append("Minimum password length should be 8"+Environment.NewLine);
+            if(!(Regex.IsMatch(password,"[a-z]") && Regex.IsMatch(password, "[A-Z]") && Regex.IsMatch(password, "[0-9]")))
+                sb.Append("Password Should be alphanumeric"+  Environment.NewLine);
+            if(!(Regex.IsMatch(password, "[ <,>,~,`,!,@,#,$,%,^,&,*,( ,),\\-,,+,=,{,},[,\\],|,\\,;,:,\",<,>,.,/,?]")))
+                    sb.Append("Password Must have a special character" + Environment.NewLine);
+
+            return sb.ToString();
+
+
         }
     }
 }
