@@ -62,14 +62,36 @@ namespace CityInfo.API.Controllers
         public async Task<ActionResult<CityDto>> CreateCity(
             CityForCreationDto request)
         {
+            var user = await _cityInfoRepository.GetUserAsync(request.userName);
+            if (user == null)
+            {
+                return BadRequest(new
+                {
+                    Message = "User Name not found"
+                });
+            }
 
-            var finalCity = _mapper.Map<City>(request);
+            CityForDatabaseDto cityRequest = new CityForDatabaseDto
+            {
+                userId = user.Id,
+                Description = request.Description,
+                Name = request.Name,
+
+
+            };
+
+            
+
+            var finalCity = _mapper.Map<City>(cityRequest);
 
             await _cityInfoRepository.AddCityAsync(finalCity);
 
             await _cityInfoRepository.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new
+            {
+                Message = "City Added"
+            });
         }
 
         [HttpPut("{cityId}")]

@@ -17,14 +17,17 @@ export class AddCityComponent {
     this.addCityRequest = {
       name: '',
       description: '',
-      userId: 0
+      userName: ''
     };
   }
+
   
   formAddCity(){
     this.cityService.addCity(this.addCityRequest)
     .subscribe({
       next: (addCityRequest) => {
+
+        alert("City Added")
         this.router.navigate(['admin/cities'])
 
       },

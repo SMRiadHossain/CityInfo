@@ -34,9 +34,9 @@ namespace CityInfo.API.Controllers
             {
                 return NotFound(new {Message = "User Not Found"});
             }
-
-            var pass = await _cityInfoRepository.PasswordValidAsync(userObj.password);
-            if (!pass)
+            var pass = await _cityInfoRepository.GetUserAsync(userObj.userName);
+            var isValid = PasswordHasher.VerifyPassword(userObj.password, pass.password);
+            if (!isValid)
             {
                 return NotFound(new { Message = "Wrong Password" });
             }

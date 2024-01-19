@@ -10,6 +10,7 @@ namespace CityInfo.API.Services
 
         Task<City?> GetCityAsync(int cityId, bool includePointOfInterest);
         Task<User> GetUserAsync(int userId);
+        Task<User> GetUserAsync(string userName);
         Task<bool> CityExistAsync(int cityId);
         Task<IEnumerable<PointOfInterest>> GetPointOfInterestForCityAsync(int cityId);
         Task<PointOfInterest?> GetPointOfInterestForCityAsync(int cityId,
@@ -32,9 +33,11 @@ namespace CityInfo.API.Services
         Task<bool> UserExistAsync(string userName);
         Task<bool> UserExistAsync(int userId);
         Task<bool> EmailExistAsync(string email);
-        Task<bool> PasswordValidAsync(string password);
         Task AddNewUserAsync(UserDto finalUSerDetails);
 
         string CheckPasswordStrength(string password);
+
+
+
     }
 }

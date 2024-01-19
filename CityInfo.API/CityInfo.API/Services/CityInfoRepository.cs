@@ -40,9 +40,13 @@ namespace CityInfo.API.Services
 
         public async Task<User>GetUserAsync(int userId)
         {
-            return await _context.Users
-                .Where(u => u.Id == userId).FirstOrDefaultAsync();
+            return await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
         }
+        public async Task<User> GetUserAsync(string userName)
+        {
+            return await _context.Users.Where(c => c.userName == userName).FirstOrDefaultAsync();
+        }
+
 
         public async Task<bool> CityExistAsync(int cityId)
         {
@@ -124,11 +128,6 @@ namespace CityInfo.API.Services
         public async Task<bool> UserExistAsync(int userId)
         {
             return await _context.Users.AnyAsync(c => c.Id == userId);
-        }
-
-        public async Task<bool> PasswordValidAsync(string password)
-        {
-            return await _context.Users.AnyAsync(c => c.password == password);
         }
 
         public Task AddNewUserAsync(UserDto finalUSerDetails)

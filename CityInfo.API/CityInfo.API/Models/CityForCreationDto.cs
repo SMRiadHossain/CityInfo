@@ -11,6 +11,6 @@ namespace CityInfo.API.Models
         [MaxLength(200)]
         public string? Description { get; set; }
 
-        public int userId { get; set; }
+        public string userName { get; set; }
     }
 }
