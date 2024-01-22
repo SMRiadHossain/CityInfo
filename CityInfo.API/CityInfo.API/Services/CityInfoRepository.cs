@@ -19,10 +19,18 @@ namespace CityInfo.API.Services
         {
             return await _context.Cities.OrderBy(c => c.Name).ToListAsync();
         }
+        public async Task<IEnumerable<City>> GetCitiesAsync(string obj)
+        {
+            return await _context.Cities.Where(c => c.Name == obj).ToListAsync();
+        }
 
         public async Task<IEnumerable<PointOfInterest>> GetPointsOfInterestAsync()
         {
             return await _context.PointsOfInterest.OrderBy(c => c.Name).ToListAsync();
+        }
+        public async Task<IEnumerable<PointOfInterest>> GetPointsOfInterestAsync(string obj)
+        {
+            return await _context.PointsOfInterest.Where(c => c.Name == obj).ToListAsync();
         }
 
 
@@ -38,6 +46,13 @@ namespace CityInfo.API.Services
                 .Where(c => c.Id == cityId) .FirstOrDefaultAsync();
         }
 
+        public async Task<City?> GetCityAsync(string cityName)
+        {
+            
+            return await _context.Cities
+                .Where(c => c.Name == cityName).FirstOrDefaultAsync();
+        }
+
         public async Task<User>GetUserAsync(int userId)
         {
             return await _context.Users.Where(u => u.Id == userId).FirstOrDefaultAsync();
@@ -51,6 +66,11 @@ namespace CityInfo.API.Services
         public async Task<bool> CityExistAsync(int cityId)
         {
             return await _context.Cities.AnyAsync(c => c.Id == cityId);
+        }
+
+        public async Task<bool> CityExistAsync(string Name)
+        {
+            return await _context.Cities.AnyAsync(c => c.Name == Name);
         }
 
         public async Task<IEnumerable<PointOfInterest>> GetPointOfInterestForCityAsync(int cityId)

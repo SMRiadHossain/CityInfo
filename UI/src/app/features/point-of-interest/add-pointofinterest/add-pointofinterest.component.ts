@@ -14,7 +14,7 @@ export class AddPointofinterestComponent {
 
   constructor(private router:Router ,private pointofinterestService: PointofinterestService ) {
     this.addPointofinterestRequest = {
-      Id: 0,
+      cityName: '',
       name: '',
       description: '',
       userId: 0
@@ -24,10 +24,10 @@ export class AddPointofinterestComponent {
   }
   
   onFormSubmit(){
-    this. pointofinterestService.addPointOfInterest(this.addPointofinterestRequest.Id, this.addPointofinterestRequest.userId, this.addPointofinterestRequest)
+    this. pointofinterestService.addPointOfInterest(this.addPointofinterestRequest.cityName, this.addPointofinterestRequest.userId, this.addPointofinterestRequest)
     .subscribe({
       next: (response) => {
-        this.router.navigate(['admin/pointsofinterest']);
+        this.router.navigate(['lists/pointsofinterest']);
       },
       error: (response) =>{
         console.log(response);

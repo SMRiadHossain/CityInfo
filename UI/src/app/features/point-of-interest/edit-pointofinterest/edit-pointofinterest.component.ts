@@ -16,7 +16,7 @@ export class EditPointofinterestComponent implements OnInit {
     id: 0,
     name: '',
     description: '',
-    cityId: 0,
+    cityName: '',
     userId: 0
   };
 
@@ -49,7 +49,7 @@ export class EditPointofinterestComponent implements OnInit {
 
 
   updatePointOfInterest(){
-    this.pointofinterestService.updatePointOfInterest(this.pointofinterestDetails.cityId,this.pointofinterestDetails.id,this.pointofinterestDetails)
+    this.pointofinterestService.updatePointOfInterest(this.pointofinterestDetails.cityName,this.pointofinterestDetails.id,this.pointofinterestDetails)
     .subscribe({
       next: (response) => {
         this.router.navigate(['/admin/pointsofinterest']);

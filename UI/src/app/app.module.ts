@@ -16,6 +16,7 @@ import { HomeComponent } from './features/home/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { SignupComponent } from './features/signup/signup.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { SearchComponent } from './features/search/search.component';
 
 
 
@@ -33,6 +34,7 @@ import { FooterComponent } from './core/components/footer/footer.component';
     LoginComponent,
     SignupComponent,
     FooterComponent,
+    SearchComponent,
  
   ],
   imports: [

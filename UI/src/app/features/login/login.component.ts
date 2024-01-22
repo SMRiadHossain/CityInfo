@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (response) =>{
           alert(response.message);
-          this.router.navigate(['/admin/cities']);
+          this.router.navigate(['/lists/cities']);
 
         },
         error: (er) =>{

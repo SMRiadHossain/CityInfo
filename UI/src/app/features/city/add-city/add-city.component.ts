@@ -28,11 +28,10 @@ export class AddCityComponent {
       next: (addCityRequest) => {
 
         alert("City Added")
-        this.router.navigate(['admin/cities'])
-
+        this.router.navigate(['lists/cities'])
       },
-      error: (Response) =>{
-        alert("UserId not Exist");
+      error: (er) =>{
+        alert(er?.error.message);
       }
     })
   }

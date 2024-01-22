@@ -1,5 +1,5 @@
 export interface AddPointofinterestRequest {
-    Id: number;
+    cityName: string;
     name: string;
     description: string;
     userId: number;

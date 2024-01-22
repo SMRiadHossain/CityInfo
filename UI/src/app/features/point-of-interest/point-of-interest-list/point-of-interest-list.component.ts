@@ -17,6 +17,7 @@ export class PointOfInterestListComponent implements OnInit{
   //   cityId: 0
   // };
   pointCityId: number = 0;
+  pointCityName: string = '';
   
   static cId: number;
 
@@ -34,7 +35,7 @@ export class PointOfInterestListComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.pointOfInterestService.getAllPointOfInterests(this.pointCityId)
+    this.pointOfInterestService.getAllPointOfInterests(this.pointCityName)
     .subscribe({
       next: (pointsofinterests) => {
         this.pointsofinterests= pointsofinterests;
@@ -49,8 +50,8 @@ export class PointOfInterestListComponent implements OnInit{
   }
 
 
-  deletePoint(cityId: number,id: number){
-    this.pointOfInterestService.deletePoint(cityId,id)
+  deletePoint(cityName: string,id: number){
+    this.pointOfInterestService.deletePoint(cityName,id)
     .subscribe({
       next: (response) => {
         location.reload();

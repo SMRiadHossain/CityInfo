@@ -42,7 +42,7 @@ export class EditCityComponent implements OnInit{
     this.cityService.updateCity(this.cityDetails.id,this.cityDetails)
     .subscribe({
       next: (response) => {
-        this.router.navigate(['/admin/cities']);
+        this.router.navigate(['/lists/cities']);
       }
     });
   }

@@ -71,6 +71,15 @@ namespace CityInfo.API.Controllers
                 });
             }
 
+            /*var city = await _cityInfoRepository.CityExistAsync(request.Name);
+            if (city)
+            {
+                return BadRequest(new
+                {
+                    Message = "City Already Exist"
+                });
+            }*/
+
             CityForDatabaseDto cityRequest = new CityForDatabaseDto
             {
                 userId = user.Id,

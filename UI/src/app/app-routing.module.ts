@@ -9,31 +9,32 @@ import { EditPointofinterestComponent } from './features/point-of-interest/edit-
 import { HomeComponent } from './features/home/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { SignupComponent } from './features/signup/signup.component';
+import { SearchComponent } from './features/search/search.component';
 
 
 const routes: Routes = [
   {
-    path: 'admin/cities',
+    path: 'lists/cities',
     component: CityListComponent
   },
   {
-    path: 'admin/cities/add',
+    path: 'lists/cities/add',
     component: AddCityComponent
   },
   {
-    path: 'admin/pointsofinterest',
+    path: 'lists/pointsofinterest',
     component: PointOfInterestListComponent
   },
   {
-    path: 'admin/pointofinterest/add',
+    path: 'lists/pointofinterest/add',
     component: AddPointofinterestComponent
   },
   {
-    path: 'admin/cities/edit/:id',
+    path: 'lists/cities/edit/:id',
     component: EditCityComponent
   },
   {
-    path: 'admin/pointsofinterest/edit/:cityId/:id',
+    path: 'lists/pointsofinterest/edit/:cityId/:id',
     component: EditPointofinterestComponent
   },
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: 'search/:obj',
+    component: SearchComponent
   }
 ];
 
