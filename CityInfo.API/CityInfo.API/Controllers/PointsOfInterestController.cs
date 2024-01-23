@@ -51,14 +51,15 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpGet("{pointofinterestid}", Name = "GetPointOfInterest")]
-        public async Task<ActionResult<PointOfInterestDto>> GetPointOfInterest(int cityId, int pointofinterestid)
+        public async Task<ActionResult<PointOfInterestDto>> GetPointOfInterest(string cityName, int pointofinterestid)
         {
-            if(!await _cityInfoRepository.CityExistAsync(cityId))
+            if(!await _cityInfoRepository.CityExistAsync(cityName))
             {
                 return NotFound();
             }
+            var city = await _cityInfoRepository.GetCityAsync(cityName);
             var pointOfInterest = await _cityInfoRepository
-                .GetPointOfInterestForCityAsync (cityId, pointofinterestid);
+                .GetPointOfInterestForCityAsync (city.Id, pointofinterestid);
             if(pointOfInterest == null)
             {
                 return NotFound();

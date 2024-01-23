@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PointOfInterest, cityid } from '../models/pointofinterest.mdel';
+import { PointOfInterest, PointOfInterestEdit, cityid } from '../models/pointofinterest.mdel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PointofinterestService } from '../services/pointofinterest.service';
 import { PointOfInterestListComponent } from '../point-of-interest-list/point-of-interest-list.component';
@@ -12,11 +12,11 @@ import { PointOfInterestListComponent } from '../point-of-interest-list/point-of
 })
 export class EditPointofinterestComponent implements OnInit {
 
-  pointofinterestDetails: PointOfInterest = {
+  pointofinterestDetails: PointOfInterestEdit = {
     id: 0,
     name: '',
     description: '',
-    cityName: '',
+    cityId: 0,
     userId: 0
   };
 
@@ -26,14 +26,15 @@ export class EditPointofinterestComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (params) => {
-        const cityId =params.get('cityId');
+        const cityName =params.get('cityName');
         const id = params.get('id');
 
-        if(cityId){
+        if(cityName){
           //call the api
-          this.pointofinterestService.getPointOfInterest(Number(cityId),Number(id))
+          this.pointofinterestService.getPointOfInterest(cityName,Number(id))
           .subscribe({
             next: (response) => {
+              //console.log(response)
               this.pointofinterestDetails = response;
             },
             error: (response) => {
@@ -49,11 +50,17 @@ export class EditPointofinterestComponent implements OnInit {
 
 
   updatePointOfInterest(){
-    this.pointofinterestService.updatePointOfInterest(this.pointofinterestDetails.cityName,this.pointofinterestDetails.id,this.pointofinterestDetails)
+    this.route.paramMap
     .subscribe({
-      next: (response) => {
-        this.router.navigate(['/admin/pointsofinterest']);
+      next: (params) => {
+        const cityName = params.get('cityName');
+        if(cityName)
+          this.pointofinterestService.updatePointOfInterest(cityName,this.pointofinterestDetails.id,this.pointofinterestDetails)
+        this.router.navigate(['/lists/pointsofinterest']);
       },
+      error: (response) =>{
+        console.log(response);
+      }
     });
   }
 

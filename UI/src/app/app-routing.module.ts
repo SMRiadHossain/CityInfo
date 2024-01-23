@@ -34,7 +34,7 @@ const routes: Routes = [
     component: EditCityComponent
   },
   {
-    path: 'lists/pointsofinterest/edit/:cityId/:id',
+    path: 'lists/pointsofinterest/edit/:cityName/:id',
     component: EditPointofinterestComponent
   },
   {

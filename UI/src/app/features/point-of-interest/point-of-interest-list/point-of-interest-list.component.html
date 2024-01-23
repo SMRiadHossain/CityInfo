@@ -38,10 +38,10 @@
                     <td>{{points.id}}</td>
                     <td>{{points.name}}</td>
                     <td>{{points.description}}</td>
-                    <td>{{points.cityName}}</td>
+                    <td>{{pointCityName}}</td>
                     <td>{{points.userId}}</td>
                     <td><a class="btn btn-primary" [routerLink] = 
-                        "['/lists/pointsofinterest/edit/'+points.cityName+'/'+points.id]">Edit</a></td>
+                        "['/lists/pointsofinterest/edit/'+pointCityName+'/'+points.id]">Edit</a></td>
                     <td><button type="button" class="btn btn-danger" (click)="deletePoint(pointCityName,points.id)">Delete</button></td>
                 </tr>
             </tbody>
