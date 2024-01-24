@@ -1,4 +1,11 @@
 <div class="outer">
+    <div class="content">
+        <h1>City <span>Info</span></h1>
+        <form #form="ngForm"(ngSubmit)="ngOnInit()">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" id = "obj" name="obj" [(ngModel)] = "searchObj">
+            <button class="btn btn-outline-success my-2 my-sm-0" [routerLink]="['/search/'+ searchObj]">Search</button>
+        </form>
+    </div>
     <div class="container">
         <h3>Search Result: {{search}}</h3>
         <table class="table" *ngIf="searchReturnObj && searchReturnObj.length>0">

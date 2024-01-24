@@ -86,7 +86,7 @@ namespace CityInfo.API.Services
                 .Where(p => p.CityId == cityId && p.Id == pointOfInterestId)
                 .FirstOrDefaultAsync();
         }
-        public async Task AddPointOfInterestForCityAsync(int cityId, int userId,
+        public async Task AddPointOfInterestForCityAsync(int cityId, string userName,
             PointOfInterest pointOfInterest)
         {
             var city = await GetCityAsync(cityId, false);
@@ -94,7 +94,7 @@ namespace CityInfo.API.Services
             {
                 city.PointsOfInterest.Add(pointOfInterest);
             }
-            var user = await GetUserAsync(userId);
+            var user = await GetUserAsync(userName);
             if(user != null)
             {
                 user.PointsOfInterest.Add(pointOfInterest);

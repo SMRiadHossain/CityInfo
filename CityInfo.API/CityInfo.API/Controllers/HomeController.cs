@@ -23,6 +23,10 @@ namespace CityInfo.API.Controllers
         [HttpGet("{obj}")]
         public async Task<ActionResult<IEnumerable<SearchDto>>> SearchResult(string obj)
         {
+            if(obj == null)
+            {
+                return BadRequest();
+            }
 
             var cityEntities = await _cityInfoRepository.GetCitiesAsync(obj);
 

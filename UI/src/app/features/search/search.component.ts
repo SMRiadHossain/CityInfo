@@ -10,9 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchComponent implements OnInit{
 
-
+  
   searchReturnObj: searchReturn[] = [];
-  search: string = '';
+  searchObj: string = '';
+  search: string ='';
 
   constructor(private homeService: HomeService,private route: ActivatedRoute){} 
 
@@ -22,14 +23,15 @@ export class SearchComponent implements OnInit{
         const obj = params.get('obj');
 
         if(obj){
-          this.search = obj;
+          this.searchObj = obj;
           this.homeService.searchResult(obj)
           .subscribe({
             next: (searchreturn) =>{
               this.searchReturnObj = searchreturn;
+              this.search = obj;
             },
             error: (er) =>{
-              alert(er?.error.message);
+              alert("No match Found");
             }
           });
 

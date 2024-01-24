@@ -16,15 +16,18 @@ export class HomeComponent implements OnInit{
   constructor(private homeService: HomeService){} 
 
   ngOnInit(): void {
-    this.homeService.searchResult(this.searchObj)
-    .subscribe({
-      next: (searchreturn) =>{
-        this.searchReturnObj = searchreturn;
-      },
-      error: (er) =>{
-        alert(er?.error.message);
-      }
-    })
+    if(this.searchObj != null){
+      this.homeService.searchResult(this.searchObj)
+      .subscribe({
+        next: (searchreturn) =>{
+          this.searchReturnObj = searchreturn;
+        },
+        error: (er) =>{
+          alert(er?.error.message);
+          
+        }
+      })
+    }
   }
 
 

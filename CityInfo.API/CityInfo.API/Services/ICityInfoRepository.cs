@@ -20,7 +20,7 @@ namespace CityInfo.API.Services
         Task<IEnumerable<PointOfInterest>> GetPointOfInterestForCityAsync(int cityId);
         Task<PointOfInterest?> GetPointOfInterestForCityAsync(int cityId,
             int pointOfInterestId);
-        Task AddPointOfInterestForCityAsync(int cityId,int userId, PointOfInterest pointOfInterest);
+        Task AddPointOfInterestForCityAsync(int cityId,string userName, PointOfInterest pointOfInterest);
 
         Task<City> AddCityAsync(City city);
 

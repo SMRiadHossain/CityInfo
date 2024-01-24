@@ -67,10 +67,10 @@ namespace CityInfo.API.Controllers
             return Ok(_mapper.Map<PointOfInterestDto>(pointOfInterest));
         }
 
-        [HttpPost("{userId}")]
+        [HttpPost("{userName}")]
 
         public async Task<ActionResult<PointOfInterestDto>> CreatePointOfInterest(
-            string cityName,int userId,
+            string cityName,string userName,
             PointOfInterestForCreationDto pointOfInterest)
         {
             var city = await _cityInfoRepository.GetCityAsync(cityName);
@@ -78,7 +78,7 @@ namespace CityInfo.API.Controllers
             {
                 return NotFound();
             }
-            if (!await _cityInfoRepository.UserExistAsync(userId))
+            if (!await _cityInfoRepository.UserExistAsync(userName))
             {
                 return NotFound();
             }
@@ -86,7 +86,7 @@ namespace CityInfo.API.Controllers
             
             var finalPointOfInterest = _mapper.Map<Entities.PointOfInterest>(pointOfInterest);
             await _cityInfoRepository.AddPointOfInterestForCityAsync(
-                city.Id, userId, finalPointOfInterest);
+                city.Id, userName, finalPointOfInterest);
 
             await _cityInfoRepository.SaveChangesAsync();
             return Created();
@@ -104,18 +104,19 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpPut("{pointofinterestid}")]
-        public async Task<ActionResult> UpdatePointOfInterest(int cityId, int pointOfInterestId,
+        public async Task<ActionResult> UpdatePointOfInterest(string cityName, int pointOfInterestId,
             PointOfInterestForUpdateDto pointOfInterest)
         {
-            if(!await _cityInfoRepository.CityExistAsync(cityId))
+            if(!await _cityInfoRepository.CityExistAsync(cityName))
             {
                 return NotFound();
             }
 
 
             // find point of interest
+            var city = await _cityInfoRepository.GetCityAsync(cityName);
             var pointOfInterestEntity = await _cityInfoRepository
-                .GetPointOfInterestForCityAsync(cityId, pointOfInterestId);
+                .GetPointOfInterestForCityAsync(city.Id, pointOfInterestId);
             if (pointOfInterestEntity == null)
             {
                 return NotFound();
@@ -126,7 +127,11 @@ namespace CityInfo.API.Controllers
             await _cityInfoRepository.SaveChangesAsync();
 
 
-            return NoContent();
+            return Ok(new
+            {
+                Message = "Place Updated"
+
+            });
         }
 
 

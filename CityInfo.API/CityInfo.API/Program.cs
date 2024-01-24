@@ -1,9 +1,12 @@
 using CityInfo.API;
 using CityInfo.API.DbContexts;
 using CityInfo.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -49,6 +52,26 @@ builder.Services.AddTransient<IMailService, CloudMailService>();
 builder.Services.AddDbContext<CityInfoContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("CityInfoConnectionString"));
+});
+
+
+
+//JWT token addition
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("riad.datapath.first.project")),
+        ValidateAudience = false,
+        ValidateIssuer = false
+    };
 });
 
 builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();

@@ -17,21 +17,22 @@ export class AddPointofinterestComponent {
       cityName: '',
       name: '',
       description: '',
-      userId: 0
+      userName: ''
     };
     
     
   }
   
   onFormSubmit(){
-    this. pointofinterestService.addPointOfInterest(this.addPointofinterestRequest.cityName, this.addPointofinterestRequest.userId, this.addPointofinterestRequest)
+    this. pointofinterestService.addPointOfInterest(this.addPointofinterestRequest.cityName, this.addPointofinterestRequest.userName, this.addPointofinterestRequest)
     .subscribe({
       next: (response) => {
+        alert("Place added")
         this.router.navigate(['lists/pointsofinterest']);
       },
       error: (response) =>{
         console.log(response);
-        alert("UserId or City not Exist");
+        alert("UserName or City not Exist");
       }
     })
   }

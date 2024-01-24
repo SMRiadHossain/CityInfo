@@ -11,8 +11,8 @@ export class PointofinterestService {
 
   constructor(private http: HttpClient) { }
 
-  addPointOfInterest(cityName: string, userId: number, model: AddPointofinterestRequest): Observable<void>{
-    return this.http.post<void>(`https://localhost:7156/api/cities/${cityName}/pointsofinterest/`+userId,model)
+  addPointOfInterest(cityName: string, userName: string, model: AddPointofinterestRequest): Observable<void>{
+    return this.http.post<void>(`https://localhost:7156/api/cities/${cityName}/pointsofinterest/`+userName,model)
   }
 
   getAllPointOfInterests(cityName: string): Observable<PointOfInterest[]>{

@@ -12,6 +12,8 @@ import { PointOfInterestListComponent } from '../point-of-interest-list/point-of
 })
 export class EditPointofinterestComponent implements OnInit {
 
+  cityName: string = '';
+
   pointofinterestDetails: PointOfInterestEdit = {
     id: 0,
     name: '',
@@ -26,11 +28,13 @@ export class EditPointofinterestComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (params) => {
-        const cityName =params.get('cityName');
+        const cityName =params.get('pointCityName');
+        
         const id = params.get('id');
 
         if(cityName){
           //call the api
+          this.cityName = cityName;
           this.pointofinterestService.getPointOfInterest(cityName,Number(id))
           .subscribe({
             next: (response) => {
@@ -50,18 +54,14 @@ export class EditPointofinterestComponent implements OnInit {
 
 
   updatePointOfInterest(){
-    this.route.paramMap
+    this.pointofinterestService.updatePointOfInterest(this.cityName,
+      this.pointofinterestDetails.id,this.pointofinterestDetails)
     .subscribe({
-      next: (params) => {
-        const cityName = params.get('cityName');
-        if(cityName)
-          this.pointofinterestService.updatePointOfInterest(cityName,this.pointofinterestDetails.id,this.pointofinterestDetails)
+      next: (response) =>{
+        alert("Place Updated");
         this.router.navigate(['/lists/pointsofinterest']);
-      },
-      error: (response) =>{
-        console.log(response);
       }
-    });
+    })
   }
 
 }
